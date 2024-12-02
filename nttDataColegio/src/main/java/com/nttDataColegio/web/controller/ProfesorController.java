@@ -19,9 +19,9 @@ public class ProfesorController {
     @Autowired
     private IProfesorService iProfesorService;
 
-    @GetMapping("/listar")
+    @GetMapping()
     public ResponseEntity<List<ProfesorDto>> getListaProfesores() {
-        return ResponseEntity.ok(iProfesorService.getListaProfesores());
+        return ResponseEntity.ok(iProfesorService.getProfesores());
     }
 
     @GetMapping("/{profesorId}/asignaturas-estudiantes")

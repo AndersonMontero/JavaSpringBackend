@@ -2,8 +2,10 @@ package com.nttDataColegio.business.service.impl;
 
 import com.nttDataColegio.business.repository.*;
 import com.nttDataColegio.business.service.IProfesorService;
+import com.nttDataColegio.common.exception.HttpGenericException;
 import com.nttDataColegio.domain.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,21 +27,20 @@ public class ProfesorService implements IProfesorService {
     private IEstudianteRepository iEstudianteRepository;
 
     @Override
-    public List<ProfesorDto> getListaProfesores() {
-        List<ProfesorDto> profesores = iProfesorRepository.getListaProfesores();
-        return profesores;
+    public List<ProfesorDto> getProfesores() {
+        return iProfesorRepository.getProfesores();
     }
 
     @Override
     public ProfesorAsignaturasEstudiantesDto getobtenerAsignaturasYEstudiantes(Integer profesorId) {
         ProfesorDto profesorDto = iProfesorRepository.getProfesor(profesorId);
         if (profesorDto == null) {
-            return null;
+            throw new HttpGenericException(HttpStatus.NOT_FOUND, "No existe el profesor");
         }
 
         List<AsignaturaDto> asignaturaDtoList = iAsignaturaRepository.getAsignatura(profesorDto.getId());
         if (asignaturaDtoList == null) {
-            return null;
+            throw new HttpGenericException(HttpStatus.NOT_ACCEPTABLE, "No existen asignaturas");
         }
 
         List<AsignaturaEstudiantesDto> asignaturaEstudiantesList = new ArrayList<>();
@@ -47,13 +48,13 @@ public class ProfesorService implements IProfesorService {
             List<EstudianteDto> estudiantes = new ArrayList<>();
             List<EstudianteAsignaturaDto> estudianteAsignaturaList = iEstudianteAsignaturaRepository.getEstudianteAsignatura(asignatura.getId());
             if (estudianteAsignaturaList == null) {
-                return null;
+                throw new HttpGenericException(HttpStatus.NOT_ACCEPTABLE, "No existen estudiantes");
             }
 
             for (EstudianteAsignaturaDto estudianteAsignatura : estudianteAsignaturaList) {
                 EstudianteDto estudianteDto = iEstudianteRepository.getEstudiante(estudianteAsignatura.getIdEstudiante());
                 if (estudianteDto == null) {
-                    return null;
+                    throw new HttpGenericException(HttpStatus.NOT_ACCEPTABLE, "No existe el estudiante");
                 }
                 estudiantes.add(estudianteDto);
             }

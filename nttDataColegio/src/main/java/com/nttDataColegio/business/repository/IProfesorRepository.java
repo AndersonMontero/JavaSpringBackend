@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface IProfesorRepository {
 
-    List<ProfesorDto> getListaProfesores();
-
-    ProfesorAsignaturasEstudiantesDto getobtenerAsignaturasYEstudiantes(Integer profesorId);
+    List<ProfesorDto> getProfesores();
 
     ProfesorDto getProfesor(Integer profesorId);
 }

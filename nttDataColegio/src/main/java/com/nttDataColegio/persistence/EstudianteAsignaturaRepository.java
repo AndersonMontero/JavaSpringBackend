@@ -23,10 +23,9 @@ public class EstudianteAsignaturaRepository implements IEstudianteAsignaturaRepo
     @Override
     public List<EstudianteAsignaturaDto> getEstudianteAsignatura(Integer id) {
         List<EstudianteAsignaturaEntity> entities = estudianteAsignaturaCrudRepository.findByIdAsignaturaId(id);
-        List<EstudianteAsignaturaDto> respuesta = entities.stream()
+        return entities.stream()
                 .map(iEstudianteAsignaturaMapper::toEstudianteAsignaturaDto)
                 .collect(Collectors.toList());
-        return respuesta;
     }
 
 }

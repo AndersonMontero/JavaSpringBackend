@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IProfesorService {
 
-    List<ProfesorDto> getListaProfesores();
+    List<ProfesorDto> getProfesores();
 
     ProfesorAsignaturasEstudiantesDto getobtenerAsignaturasYEstudiantes(Integer profesorId);
 }

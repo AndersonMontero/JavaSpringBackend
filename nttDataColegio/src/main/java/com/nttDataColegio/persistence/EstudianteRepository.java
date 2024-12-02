@@ -20,7 +20,6 @@ public class EstudianteRepository implements IEstudianteRepository {
     @Override
     public EstudianteDto getEstudiante(Integer idEstudiante) {
         EstudianteEntity estudianteEntity = estudianteCrudRepository.findById(idEstudiante).orElse(null);
-        EstudianteDto estudianteDto = estudianteMapper.toEstudianteDto(estudianteEntity);
-        return estudianteDto;
+        return estudianteMapper.toEstudianteDto(estudianteEntity);
     }
 }

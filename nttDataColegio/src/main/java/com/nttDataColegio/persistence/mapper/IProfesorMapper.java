@@ -11,7 +11,5 @@ import java.util.List;
 public interface IProfesorMapper {
     List<ProfesorDto> toProfesoresDto(List<ProfesorEntity> all);
 
-    ProfesorAsignaturasEstudiantesDto toProfesorAsignaturasEstudiantesDto(ProfesorEntity profesorEntity);
-
     ProfesorDto toProfesorDto(ProfesorEntity profesorEntity);
 }

@@ -21,24 +21,12 @@ public class ProfesorRepository implements IProfesorRepository {
     private IProfesorMapper profesorMapper;
 
     @Override
-    public List<ProfesorDto> getListaProfesores() {
-        List<ProfesorDto> profesores = profesorMapper.toProfesoresDto((List<ProfesorEntity>) profesorCrudRepository.findAll());
-        return profesores;
-    }
-
-    @Override
-    public ProfesorAsignaturasEstudiantesDto getobtenerAsignaturasYEstudiantes(Integer profesorId) {
-        ProfesorEntity profesorEntity = profesorCrudRepository.findById(profesorId).orElse(null);
-        if (profesorEntity != null) {
-            ProfesorAsignaturasEstudiantesDto profesorAsignaturasEstudiantesDto = profesorMapper.toProfesorAsignaturasEstudiantesDto(profesorEntity);
-            return profesorAsignaturasEstudiantesDto;
-        }
-        return null;
+    public List<ProfesorDto> getProfesores() {
+        return profesorMapper.toProfesoresDto((List<ProfesorEntity>) profesorCrudRepository.findAll());
     }
 
     @Override
     public ProfesorDto getProfesor(Integer profesorId) {
-        ProfesorDto profesorDto = profesorMapper.toProfesorDto(profesorCrudRepository.findById(profesorId).orElse(null));
-        return profesorDto;
+        return profesorMapper.toProfesorDto(profesorCrudRepository.findById(profesorId).orElse(null));
     }
 }

@@ -12,6 +12,4 @@ public interface IEstudianteAsignaturaMapper {
     @Mapping(source = "id.idEstudiante", target = "idEstudiante")
     @Mapping(source = "id.idAsignatura", target = "idAsignatura")
     EstudianteAsignaturaDto toEstudianteAsignaturaDto(EstudianteAsignaturaEntity entity);
-
-    List<EstudianteAsignaturaDto> toEstudianteAsignaturaDto(List<EstudianteAsignaturaEntity> entities);
 }
